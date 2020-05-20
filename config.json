@@ -1,0 +1,68 @@
+{
+	"name": "LEAPConnector",
+
+	"namespace": "LEAP\\LEAPConnector",
+
+	"description": "This module connects REDCap databases to LEAP",
+
+	"documentation": "README.md",
+
+	"authors": [		{
+			"name": "Aditya Chinchure",
+			"email": "aditya.chinchure@alumni.ubc.ca",
+			"institution": "LEAP"
+		}
+	],
+
+	"permissions": [
+		"redcap_every_page_top"
+	],
+	
+	"enable-every-page-hooks-on-system-pages":true,	
+
+	"links": {
+		"project": [
+		],
+		"control-center": [
+		]
+	},
+
+	"no-auth-pages": [
+		"endpoint"
+	],
+
+	"project-settings": [
+
+	],
+
+	"system-settings": [
+		{
+            "key": "expose_sql_error",
+            "name": "Expose SQL error on response",
+            "type": "checkbox",
+            "helper": "Useful for testing or debugging purposes.<br>Warning: SQL message errors can expose details about your SQL query."
+		},
+		{
+			"key": "leap_auth_gen",
+            "name": "Generate Auth Token",
+			"type": "button",
+			"url":
+			{
+				"name": "Generate",
+				"value": "generatekey.php"
+			}
+		},
+        {
+            "key": "leap_auth",
+            "name": "LEAP Auth Token",
+            "type": "text"
+		}
+	],
+
+	"crons": [
+	],
+	
+	"compatibility": {
+		"redcap-version-min": "8.0.3"
+	}
+}
