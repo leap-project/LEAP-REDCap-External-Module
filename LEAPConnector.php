@@ -36,10 +36,13 @@ class LEAPConnector extends AbstractExternalModule {
     }
 
     // Gets data from SQL based on fields and filters
-    function getData($fields, $filters) {
+    function getData($filters) {
 
         // Construct SQL string
-        $sql = 'SELECT ' . $this->escapeString($fields) . ' FROM redcap_data WHERE ' . $this->escapeString($filters);
+        // TODO: escape str, project_id needs come from EM settings
+        $sql = 'SELECT * FROM redcap_data WHERE project_id=13 AND record IN (SELECT record FROM redcap_data WHERE project_id=13 AND ' . $filters . ')';
+        
+        // $sql = 'SELECT ' . $this->escapeString($fields) . ' FROM redcap_data WHERE ' . $filters;
 
         try {
             // Query SQL using the external modules query() function

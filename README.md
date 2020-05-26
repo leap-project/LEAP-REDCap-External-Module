@@ -29,8 +29,7 @@ The URL will be:
 
 You can query it with the following POST parameters:
 1. **auth** - your auth token
-2. **fields** - the fields you want to the SELECT clause (in SQL), eg. field_name,value
-3. **filters** - the filters youo want to apply in WHERE clause, eg. record=2
+2. **filters** - the filters youo want to apply in WHERE clause, eg. record=2
 
 In Postman, this will look like:
 
