@@ -3,6 +3,7 @@ namespace LEAP\LEAPConnector;
 
 use ExternalModules\AbstractExternalModule;
 use ExternalModules\ExternalModules;
+use REDCap;
 
 class LEAPConnector extends AbstractExternalModule {
     
@@ -36,17 +37,17 @@ class LEAPConnector extends AbstractExternalModule {
     }
 
     // Gets data from SQL based on fields and filters
-    function getData($filters) {
+    function getSqlResult($query) {
 
         // Construct SQL string
         // TODO: escape str, project_id needs come from EM settings
-        $sql = 'SELECT * FROM redcap_data WHERE project_id=13 AND record IN (SELECT record FROM redcap_data WHERE project_id=13 AND ' . $filters . ')';
+        // $sql = 'SELECT * FROM redcap_data WHERE project_id=13 AND record IN (SELECT record FROM redcap_data WHERE project_id=13 AND ' . $filters . ')';
         
         // $sql = 'SELECT ' . $this->escapeString($fields) . ' FROM redcap_data WHERE ' . $filters;
 
         try {
             // Query SQL using the external modules query() function
-            $result = $this->query($sql);
+            $result = $this->query($query);
 
             // Read data
             $data = array();
@@ -67,6 +68,27 @@ class LEAPConnector extends AbstractExternalModule {
         }
     }
 
+    function getData($filters, $fields) {
+
+        $params = [];
+        $params[project_id] = 13;
+        $params['return_format'] = 'json';
+
+        if ($filters != "") {
+            $params['filterLogic'] = $filters;
+        }
+
+        if ($fields != "") {
+            $params['fields'] = explode(', ', $fields);
+        }
+        
+        // $params = array('project_id'=>13,'filterLogic'=>$filters, 'fields'=>explode(', ', $fields));
+        $data = REDCap::getData($params);
+        echo json_encode(array('success' => true, 'data' => json_decode($data)));
+
+        //$all_export_field_names = REDCap::getExportFieldNames();
+        //echo json_encode($all_export_field_names);
+    }
 
     function returnErrorResponse($msg) {
         echo json_encode(array('success' => false, 'error' => $msg));

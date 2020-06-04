@@ -12,6 +12,10 @@ if (!isset($_POST['filters'])) {
     $module->returnErrorResponse('Missing param - filters');
 }
 
-$module->getData($_POST['filters']);
+if (!isset($_POST['fields'])) {
+    $module->returnErrorResponse('Missing param - fields');
+}
+
+$module->getData($_POST['filters'], $_POST['fields']);
 
 ?>
