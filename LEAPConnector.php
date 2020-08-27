@@ -17,6 +17,9 @@ class LEAPConnector extends AbstractExternalModule {
         // Share key in config options
         $this->setSystemSetting('leap_auth', $key);
 
+        // Refresh the page
+        window.location.reload(true);
+
     }
 
     // Check auth
@@ -68,10 +71,10 @@ class LEAPConnector extends AbstractExternalModule {
         }
     }
 
-    function getData($filters, $fields) {
+    function getData($filters, $fields, $pid) {
 
         $params = [];
-        $params[project_id] = 13;
+        $params['project_id'] = $pid;
         $params['return_format'] = 'json';
 
         if ($filters != "") {
@@ -82,7 +85,6 @@ class LEAPConnector extends AbstractExternalModule {
             $params['fields'] = explode(', ', $fields);
         }
         
-        // $params = array('project_id'=>13,'filterLogic'=>$filters, 'fields'=>explode(', ', $fields));
         $data = REDCap::getData($params);
         echo json_encode(array('success' => true, 'data' => json_decode($data)));
 

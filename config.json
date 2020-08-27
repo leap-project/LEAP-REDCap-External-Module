@@ -1,40 +1,30 @@
 {
 	"name": "LEAPConnector",
-
 	"namespace": "LEAP\\LEAPConnector",
-
 	"description": "This module connects REDCap databases to LEAP",
-
 	"documentation": "README.md",
-
 	"authors": [		{
 			"name": "Aditya Chinchure",
 			"email": "aditya.chinchure@alumni.ubc.ca",
 			"institution": "LEAP"
 		}
 	],
-
 	"permissions": [
 		"redcap_every_page_top"
 	],
-	
 	"enable-every-page-hooks-on-system-pages":true,	
-
 	"links": {
 		"project": [
 		],
 		"control-center": [
 		]
 	},
-
 	"no-auth-pages": [
-		"endpoint"
+		"getData",
+		"getQueryResult"
 	],
-
 	"project-settings": [
-
 	],
-
 	"system-settings": [
 		{
             "key": "expose_sql_error",
@@ -58,10 +48,6 @@
             "type": "text"
 		}
 	],
-
-	"crons": [
-	],
-	
 	"compatibility": {
 		"redcap-version-min": "8.0.3"
 	}
