@@ -1,36 +1,41 @@
 # LEAP-REDCap-External-Module
 
-**Last updated:** 05/19/20
+**Last updated:** 08/28/2020
 
 ## Overview
 This external module for REDCap enables LEAP to query and retrieve data from REDCap databases.
 
 ## Installion Guide
 
-### Setup the files:
-1. Download this repository. 
-2. Create a new folder `leap_connector_v0` in REDCap `modules` folder
+With the help of administrative access to your REDCap instance, do the following:
+
+1. Clone or download this repository: [LEAP-REDCap-External-Module](https://github.com/leap-project/LEAP-REDCap-External-Module)
+2. Create a new folder `leap_connector_v0` in REDCap's `modules` folder
 3. Move all the files to this new folder
 
-### Enable module:
+#### Enable module:
 1. In REDCap, go to the External Modules section of your system wide control panel
 2. Enable the LEAP Connector module
+3. LEAP's module requires access to all projects. Open LEAPConnector's Config and give it the permission.
 
-### Generate an auth token:
+#### Generate an auth token:
 1. In LEAP Connector's configuration, click on Generate button
-2. Close the settings window (don't save the settings)
-3. Open the config again, you will see the LEAP Auth Token text box populated with the token, which you should copy
+![Config](images/config.png)
+2. You can now visit the LEAP External Module page (under External Modules in the Control Center sidebar) to access your auth key:
+![EM](images/EMpage.png)
+
+
+## Connect your LEAP site
+
+You can connect to REDCap by adding the following to your Site Algo configuration:
+```
+"redcap_url": "<REDCap URL>/api",
+"redcap_auth": "<AUTH TOKEN>",
+"redcap_pid": <Project ID of REDCap>,
+"csv_true": "0",
+```
 
 ## Usage Guide
 
-The URL will be: 
+[Visit the API guide in the LEAP Wiki](https://github.com/leap-project/leap/wiki/REDCap-External-Module-APIs)
 
-```POST <YOUR-REDCAP-INSTANCE>/api/?type=module&prefix=leap_connector&page=endpoint```
-
-You can query it with the following POST parameters:
-1. **auth** - your auth token
-2. **filters** - the filters youo want to apply in WHERE clause, eg. record=2
-
-In Postman, this will look like:
-
-![PostmanExample](images/postman-example.png)

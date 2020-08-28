@@ -12,11 +12,14 @@
 	"permissions": [
 		"redcap_every_page_top"
 	],
-	"enable-every-page-hooks-on-system-pages":true,	
+	"enable-every-page-hooks-on-system-pages":true,
 	"links": {
-		"project": [
-		],
 		"control-center": [
+		   {
+			  "name": "LEAP External Module",
+			  "icon": "application_go",
+			  "url": "leapInfo.php"
+		   }
 		]
 	},
 	"no-auth-pages": [
@@ -27,12 +30,6 @@
 	],
 	"system-settings": [
 		{
-            "key": "expose_sql_error",
-            "name": "Expose SQL error on response",
-            "type": "checkbox",
-            "helper": "Useful for testing or debugging purposes.<br>Warning: SQL message errors can expose details about your SQL query."
-		},
-		{
 			"key": "leap_auth_gen",
             "name": "Generate Auth Token",
 			"type": "button",
@@ -41,11 +38,6 @@
 				"name": "Generate",
 				"value": "generatekey.php"
 			}
-		},
-        {
-            "key": "leap_auth",
-            "name": "LEAP Auth Token",
-            "type": "text"
 		}
 	],
 	"compatibility": {

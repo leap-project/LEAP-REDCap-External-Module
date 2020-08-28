@@ -41,13 +41,6 @@ class LEAPConnector extends AbstractExternalModule {
 
     // Gets data from SQL based on fields and filters
     function getSqlResult($query) {
-
-        // Construct SQL string
-        // TODO: escape str, project_id needs come from EM settings
-        // $sql = 'SELECT * FROM redcap_data WHERE project_id=13 AND record IN (SELECT record FROM redcap_data WHERE project_id=13 AND ' . $filters . ')';
-        
-        // $sql = 'SELECT ' . $this->escapeString($fields) . ' FROM redcap_data WHERE ' . $filters;
-
         try {
             // Query SQL using the external modules query() function
             $result = $this->query($query);
@@ -67,6 +60,7 @@ class LEAPConnector extends AbstractExternalModule {
         } catch (Exception $e) {
             // Return SQL error
             // TODO: ensure that sensitive information is not returned in the error
+            // $this->getSystemSetting('leap_auth')
             $this->returnErrorResponse($e->getMessage());
         }
     }
